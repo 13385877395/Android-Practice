@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_centerInParent="true"
+    tools:context=".login.Login">
+
+    <EditText
+        android:id="@+id/user_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:inputType="number"
+        android:hint="请输入账号"
+        android:drawableLeft="@drawable/icon_user"
+        android:drawablePadding="20dp"
+        android:maxLines="1"
+        android:maxLength="11"
+        tools:ignore="Autofill"
+        />
+    <EditText
+        android:id="@+id/password_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_below="@+id/user_login"
+        android:hint="请输入密码"
+        android:inputType="textPassword"
+        android:drawableLeft="@drawable/icon_password"
+        android:drawablePadding="20dp"
+        android:maxLines="1"
+        android:maxLength="16"
+        tools:ignore="Autofill"
+        />
+
+    <Button
+        android:id="@+id/login_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password_login"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="50dp"
+        android:text="登入"
+        android:textColor="#6B7177"
+        android:background="#33000000" />
+    <Button
+        android:id="@+id/login_face"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_login"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="50dp"
+        android:text="人脸登入"
+        android:textColor="#6B7177"
+        android:background="#33000000" />
+    <TextView
+        android:id="@+id/forgetPassword_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/primary"
+        android:text="忘记密码"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/login_face"
+        android:layout_alignRight="@id/login_face"
+        />
+    <TextView
+        android:id="@+id/register_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/primary"
+        android:text="立即注册"
+        android:layout_below="@id/login_face"
+        android:layout_alignLeft="@id/login_face"
+        android:layout_marginTop="30dp"/>
+
+</RelativeLayout>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context=".login.RegisterActivity">
+
+
+    <EditText
+        android:id="@+id/phoneNumber_reg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入手机号"
+        android:inputType="phone"
+        android:maxLength="11"
+        android:layout_marginTop="200dp"
+        tools:ignore="Autofill"/>
+
+    <EditText
+        android:id="@+id/password_reg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="请输入密码"
+        android:inputType="textPassword"
+        android:maxLength="16"
+        tools:ignore="Autofill"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/yanCode_reg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="请输入验证码"
+            android:inputType="number"
+            android:maxLength="4"
+            tools:ignore="Autofill"/>
+
+        <Button
+            android:id="@+id/yanButton_reg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="发送验证码"
+            style="@style/textStyle_2"
+            android:background="@drawable/phonenumber"
+            android:enabled="false"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/nextStep_reg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="立即注册"
+        style="@style/textStyle_2"
+        android:background="@drawable/phonenumber"
+        android:enabled="false"/>
+
+    <TextView
+        android:id="@+id/agreement_reg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="注册即代表阅读并同意使用条款和隐私政策"
+        android:textColor="@color/primary"/>
+
+</LinearLayout>

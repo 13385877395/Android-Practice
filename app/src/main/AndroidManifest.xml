@@ -21,7 +21,15 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="com.farmerbb.notepad"
           android:installLocation="auto" >
-
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name=" android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET "/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
     <uses-feature
         android:name="android.hardware.touchscreen"
         android:required="false" />
@@ -51,9 +59,7 @@
             android:targetActivity="com.farmerbb.notepad.activity.MainActivity"
             android:label="${appName}">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.APP_MAPS" />
             </intent-filter>
@@ -73,11 +79,9 @@
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.EDIT" />
                 <action android:name="android.intent.action.SEND" />
-                <action android:name="com.google.android.gm.action.AUTO_SEND" />
-
+                <action android:name="com.google.android.gm.action.AUTO_SEND"/>
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.google.android.voicesearch.SELF_NOTE" />
-
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
@@ -86,6 +90,28 @@
             android:label="@string/action_settings"
             android:theme="@style/Theme.Notepad.Dialog" >
         </activity>
+        <activity android:name="com.farmerbb.notepad.login.RegisterActivity" />
+        <activity android:name="com.farmerbb.notepad.login.ForgetActivity" />
+        <activity android:name="com.farmerbb.notepad.login.ChangePasswordPage" />
+        <activity android:name="com.farmerbb.notepad.login.Login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.farmerbb.notepad.loginface.RegisterAndRecognizeActivity"
+            android:launchMode="singleTop" />
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
     </application>
 
 </manifest>

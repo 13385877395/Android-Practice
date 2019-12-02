@@ -1,16 +1,20 @@
 package com.farmerbb.notepad.activity;
 
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.view.View;
 import android.view.Window;
+import android.widget.Toast;
 
 import com.farmerbb.notepad.R;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 public abstract class NotepadBaseActivity extends AppCompatActivity {
+
     @Override
     protected void onResume() {
         super.onResume();
