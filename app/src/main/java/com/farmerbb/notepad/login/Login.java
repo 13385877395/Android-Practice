@@ -21,11 +21,15 @@ import com.farmerbb.notepad.R;
 import com.farmerbb.notepad.activity.BaseActivity;
 import com.farmerbb.notepad.activity.MainActivity;
 import com.farmerbb.notepad.activity.NotepadBaseActivity;
+import com.farmerbb.notepad.loginface.ConfigUtil;
 import com.farmerbb.notepad.loginface.Constants;
 import com.farmerbb.notepad.loginface.RegisterAndRecognizeActivity;
 import com.farmerbb.notepad.util.DataBase;
 
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -36,6 +40,10 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+
+import static com.arcsoft.face.enums.DetectFaceOrientPriority.ASF_OP_0_ONLY;
+import static com.arcsoft.face.enums.DetectFaceOrientPriority.ASF_OP_180_ONLY;
+import static com.arcsoft.face.enums.DetectFaceOrientPriority.ASF_OP_270_ONLY;
 
 public class Login extends NotepadBaseActivity{
     private Button login;
@@ -56,6 +64,37 @@ public class Login extends NotepadBaseActivity{
             Manifest.permission.READ_PHONE_STATE
     };
 
+    boolean libraryExists = true;
+    // Demo 所需的动态库文件
+    private static final String[] LIBRARIES = new String[]{
+            // 人脸相关
+            "libarcsoft_face_engine.so",
+            "libarcsoft_face.so",
+            // 图像库相关
+            "libarcsoft_image_util.so",
+    };
+    /**
+     * 检查能否找到动态链接库，如果找不到，请修改工程配置
+     *
+     * @param libraries 需要的动态链接库
+     * @return 动态库是否存在
+     */
+    private boolean checkSoFile(String[] libraries) {
+        File dir = new File(getApplicationInfo().nativeLibraryDir);
+        File[] files = dir.listFiles();
+        if (files == null || files.length == 0) {
+            return false;
+        }
+        List<String> libraryNameList = new ArrayList<>();
+        for (File file : files) {
+            libraryNameList.add(file.getName());
+        }
+        boolean exists = true;
+        for (String library : libraries) {
+            exists &= libraryNameList.contains(library);
+        }
+        return exists;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +105,13 @@ public class Login extends NotepadBaseActivity{
         register = (TextView) findViewById(R.id.register_login);
         face = (Button) findViewById(R.id.login_face);
         dbHelper = new DataBase(this, "UserStore.db", null, 1);
+        //check
+        libraryExists = checkSoFile(LIBRARIES);
+        if (!libraryExists) {
+            Toast.makeText(this, "未找到库文件，请检查是否有将.so文件放至工程的 app\\\\src\\\\main\\\\jniLibs 目录下", Toast.LENGTH_SHORT).show();
+        } else {
+            ConfigUtil.setFtOrient(Login.this, ASF_OP_270_ONLY);
+        }
         //登入
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,6 +166,7 @@ public class Login extends NotepadBaseActivity{
                         RuntimeABI runtimeABI = FaceEngine.getRuntimeABI();
                         Log.i(TAG, "subscribe: getRuntimeABI() " + runtimeABI);
                         int activeCode = FaceEngine.activeOnline(Login.this, Constants.APP_ID, Constants.SDK_KEY);
+                        Log.e(TAG, "subscribe: "+activeCode );
                         emitter.onNext(activeCode);
                     }
                 }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<Integer>() {

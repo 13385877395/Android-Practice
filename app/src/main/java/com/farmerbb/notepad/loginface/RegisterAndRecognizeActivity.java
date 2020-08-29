@@ -1,6 +1,7 @@
 package com.farmerbb.notepad.loginface;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Point;
 import android.hardware.Camera;
@@ -26,6 +27,7 @@ import com.arcsoft.face.enums.DetectFaceOrientPriority;
 import com.arcsoft.face.enums.DetectMode;
 import com.farmerbb.notepad.R;
 import com.farmerbb.notepad.activity.BaseActivity;
+import com.farmerbb.notepad.activity.MainActivity;
 import com.farmerbb.notepad.activity.NotepadBaseActivity;
 
 import java.util.ArrayList;
@@ -525,6 +527,11 @@ public class RegisterAndRecognizeActivity extends BaseActivity implements ViewTr
                         @Override
                         public void onNext(Boolean success) {
                             String result = success ? "register success!" : "register failed!";
+                            if(success){
+                                Intent intent = new Intent(RegisterAndRecognizeActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
                             showToast(result);
                             registerStatus = REGISTER_STATUS_DONE;
                         }
@@ -684,7 +691,9 @@ public class RegisterAndRecognizeActivity extends BaseActivity implements ViewTr
                             }
                             requestFeatureStatusMap.put(requestId, RequestFeatureStatus.SUCCEED);
                             faceHelper.setName(requestId, "通过"+compareResult.getUserName());
-
+                            Intent intent = new Intent(RegisterAndRecognizeActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
                         } else {
                             faceHelper.setName(requestId, "未通过"+ "NOT_REGISTERED");
                             retryRecognizeDelayed(requestId);
